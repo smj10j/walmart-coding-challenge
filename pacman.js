@@ -2,14 +2,14 @@
 
 // Massage input string into something we can use since many shells strip out the "'" characters from args
 var args = process.argv.slice(2)
-                  .join('').replace(']','').replace('[','').replace(' ','')
+                  .join('').replace(']','').replace('[','')
                   .split(',');
 
 
 var dependencyChains = [];
 
-args.forEach(function (val, index, array) {
-  var dependencyPair = val.split(':');
+args.forEach(function (val) {
+  var dependencyPair = val.replace(' ','').split(':');
   // console.log(dependencyPair);
 
   var foundMatch = false;
@@ -18,7 +18,7 @@ args.forEach(function (val, index, array) {
     var lastDependency = dependencyChain[dependencyChain.length - 1];
     if(lastDependency == dependencyPair[0]) {
       foundMatch = true;
-      if(dependencyPair[1] == " ") {
+      if(dependencyPair[1] == "") {
         return;
       }
       if(firstDependency == dependencyPair[1]) {
@@ -35,10 +35,20 @@ args.forEach(function (val, index, array) {
 
 console.log(dependencyChains);
 
-var packageInstallOrder = '';
+var orderedPackageInstalls = [];
 
 dependencyChains.forEach(function(dependencyChain) {
-  packageInstallOrder+= dependencyChain.reverse().join(', ');
+  dependencyChain.reverse().forEach(function(dependency) {
+    var foundMatch = false;
+    orderedPackageInstalls.forEach(function(existingDependency) {
+      if(existingDependency == dependency) {
+        foundMatch = true;
+      }
+    })
+    if(!foundMatch && dependency != "") {
+      orderedPackageInstalls.push(dependency);
+    }
+  })
 });
 
-console.log(packageInstallOrder);
+console.log(orderedPackageInstalls.join(', '));
