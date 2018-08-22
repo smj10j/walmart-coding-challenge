@@ -4,19 +4,22 @@ Package Installer for Walmart Coding Challenge
 Setup
 -----
 
-Install node
+Install node, then install dependencies with npm
+
+```bash
+npm install
+```
 
 
 Running
 -------
 
 ```bash
-node pacman.js [packages array]
+node pacman-cmd.js [packages array]
 ```
 
 ie.
 
 ```bash
-node pacman.js ['KittenService: CamelCaser', 'CamelCaser: ']
+node pacman-cmd.js ['KittenService: CamelCaser', 'CamelCaser: ']
 ```
-
