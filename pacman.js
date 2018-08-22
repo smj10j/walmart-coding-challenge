@@ -32,3 +32,13 @@ args.forEach(function (val, index, array) {
   }
 
 });
+
+console.log(dependencyChains);
+
+var packageInstallOrder = '';
+
+dependencyChains.forEach(function(dependencyChain) {
+  packageInstallOrder+= dependencyChain.reverse().join(', ');
+});
+
+console.log(packageInstallOrder);
