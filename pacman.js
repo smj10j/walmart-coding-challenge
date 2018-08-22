@@ -22,7 +22,7 @@ args.forEach(function (val) {
         return;
       }
       if(firstDependency == dependencyPair[1]) {
-        throw new Error("Error: Dependencies create circular dependency for " + firstDependency);
+        throw new Error("Dependencies create circular dependency for " + firstDependency);
       }
       dependencyChain.push(dependencyPair[1]);
     }
