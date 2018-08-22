@@ -23,3 +23,10 @@ ie.
 ```bash
 node pacman-cmd.js ['KittenService: CamelCaser', 'CamelCaser: ']
 ```
+
+Tests
+-----
+
+```bash
+npm test
+```
